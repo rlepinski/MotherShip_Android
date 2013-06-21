@@ -10,7 +10,7 @@ apply plugin: 'android'
 
 dependencies {
     compile files('libs/android-support-v4.jar')
-    compile files('libs/urbanairship-lib-*.jar')
+    compile files('libs/urbanairship-lib-3.0.0.jar')
 }
 
 android {
