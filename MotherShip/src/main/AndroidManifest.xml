@@ -8,22 +8,76 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+
+    <!-- REQUIRED PERMISSIONS (for Urban Airship GCM) -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" /><!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" /><!-- This app has permission to register with GCM and receive message -->
+
+    <permission android:name="com.urbanairship.mothership.permission.C2D_MESSAGE" android:protectionLevel="signature" />
+    <uses-permission android:name="com.urbanairship.mothership.permission.C2D_MESSAGE" />
+
+
+
+    <!-- REQUIRED FOR LOCATION -->
+    <!-- Use ACCESS_COARSE_LOCATION if GPS access is not necessary -->
+    <!-- uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--  REQUIRED for wifi wake functionality -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
+        android:name="com.urbanairship.mothership.MainApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
             android:theme="@style/FullscreenTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- REQUIRED for Urban Airship GCM-->
+        <receiver android:name="com.urbanairship.CoreReceiver" />
+
+        <receiver android:name="com.urbanairship.push.GCMPushReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.urbanairship.mothership" />
+            </intent-filter>
+
+            <!--  REQUIRED for detecting when the application is upgraded so it can request a new GCM ID -->
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.urbanairship.push.PushService" android:label="Push Notification Service"/>
+        <service android:name="com.urbanairship.analytics.EventService" android:label="Event Service"/>
+
+        <!-- This is required for persisting preferences related to push and location -->
+        <provider android:name="com.urbanairship.UrbanAirshipProvider"
+                  android:authorities="com.urbanairship.mothership.urbanairship.provider"
+                  android:exported="true"
+                  android:multiprocess="true" />
+
+        <!-- Segment Support -->
+        <service android:name="com.urbanairship.location.LocationService" android:label="Segments Service"/>
+
+        <!-- Receiving pushes -->
+        <receiver android:name="com.urbanairship.mothership.PushReceiver" />
+
     </application>
 
 </manifest>
