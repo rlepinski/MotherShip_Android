@@ -67,9 +67,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="@string/twitter_feed"
-                android:width="280dp" >
-
-            </Button>
+                android:width="280dp" />
             
 			<Button
 			    android:id="@+id/button3"
@@ -78,19 +76,16 @@
 			    android:layout_gravity="center_vertical"
 			    android:layout_weight="1"
 			    android:text="@string/lakehurst_ledger"
-			    android:width="280dp" >
-  
-			</Button>
-			
-			<Button
+			    android:width="280dp" />
+
+            <Button
 			    android:id="@+id/button4"
 			    android:layout_width="wrap_content"
 			    android:layout_height="wrap_content"
 			    android:layout_gravity="center_vertical"
 			    android:layout_weight="1"
 			    android:text="@string/contact_list"
-			    android:width="280dp" 
-			</Button>
+			    android:width="280dp" />
 			
 			<Button
 			    android:id="@+id/button5"
@@ -99,8 +94,7 @@
 			    android:layout_gravity="center_vertical"
 			    android:layout_weight="1"
 			    android:text="@string/egencia"
-			    android:width="280dp" 
-			</Button>
+			    android:width="280dp" />
 
 			</LinearLayout>
 
