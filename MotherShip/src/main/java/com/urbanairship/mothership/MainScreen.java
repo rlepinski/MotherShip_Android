@@ -1,6 +1,4 @@
-package com.example.mothership;
-
-import com.example.mothership.util.SystemUiHider;
+package com.urbanairship.mothership;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
